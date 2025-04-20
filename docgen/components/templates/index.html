@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IT Report Generator</title>
+</head>
+<body>
+    <h2>Generate Your IT Report</h2>
+    <form action="/generate" method="POST">
+        <label>Report Topic:</label><br>
+        <input type="text" name="topic" required><br><br>
+
+        <label>Context / Details:</label><br>
+        <textarea name="context" rows="5" cols="50" required></textarea><br><br>
+
+        <button type="submit">Generate Report</button>
+    </form>
+</body>
+</html>

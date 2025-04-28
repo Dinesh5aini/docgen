@@ -1,0 +1,59 @@
+/* Custom styles for Document Generator */
+
+/* Global styles */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Form styles */
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.card {
+    margin-bottom: 1.5rem;
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    background-color: #0d6efd;
+    color: white;
+    font-weight: 500;
+}
+
+/* Document editor styles */
+.section-card {
+    transition: all 0.3s ease;
+}
+
+.section-card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.badge {
+    margin-right: 0.25rem;
+}
+
+/* Document preview styles */
+.document-container {
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* Footer styles */
+.footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        position: static;
+        height: auto;
+        margin-bottom: 2rem;
+    }
+}

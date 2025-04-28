@@ -1,18 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>IT Report Generator</title>
-</head>
-<body>
-    <h2>Generate Your IT Report</h2>
-    <form action="/generate" method="POST">
-        <label>Report Topic:</label><br>
-        <input type="text" name="topic" required><br><br>
+{% extends "base.html" %}
 
-        <label>Context / Details:</label><br>
-        <textarea name="context" rows="5" cols="50" required></textarea><br><br>
+{% block title %}IT Document Generator - Home{% endblock %}
 
-        <button type="submit">Generate Report</button>
-    </form>
-</body>
-</html>
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3 text-center">
+        <h1 class="mb-4">AI-Powered Technical Document Generator</h1>
+        <p class="lead">Create professional-grade IT documents, reports, and technical specifications with AI assistance.</p>
+        
+        <div class="mt-5">
+            <a href="{{ url_for('new_document') }}" class="btn btn-primary btn-lg">Create New Document</a>
+        </div>
+        
+        <div class="mt-5">
+            <h3>How It Works</h3>
+            <div class="card-group mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">1. Define Your Project</h5>
+                        <p class="card-text">Provide basic information about your project goals, technologies, and requirements.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">2. AI Generates Structure</h5>
+                        <p class="card-text">Our AI creates a comprehensive document structure tailored to your needs.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">3. Generate Content</h5>
+                        <p class="card-text">Generate section content, review, and export your complete document.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

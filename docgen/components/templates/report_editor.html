@@ -1,8 +1,0 @@
-<h2>Edit Your Report</h2>
-<form action="/preview" method="POST">
-    {% for title, content in sections.items() %}
-        <h3>{{ title }}</h3>
-        <textarea name="{{ title }}" rows="8" cols="80">{{ content }}</textarea><br><br>
-    {% endfor %}
-    <button type="submit">Preview Final Report</button>
-</form>

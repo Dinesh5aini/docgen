@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ document.data.project_title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .document-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .document-meta {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        .section-content {
+            white-space: pre-wrap;
+            margin-bottom: 2rem;
+        }
+        .section-heading {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+        .table-of-contents {
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .abstract {
+            margin: 2rem 0;
+            font-style: italic;
+        }
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="document-title">
+        <h1>{{ document.data.project_title }}</h1>
+    </div>
+    
+    <div class="document-meta">
+        <p>Generated on {{ document.created_at|default(now()) }}</p>
+    </div>
+    
+    <div class="abstract">
+        <h2>Abstract</h2>
+        <p>{{ document.data.abstract }}</p>
+    </div>
+    
+    <div class="table-of-contents">
+        <h2>Table of Contents</h2>
+        <ul>
+            {% for section in document.schema.sections %}
+                {% set section_generated = false %}
+                {% for gen_section in sections %}
+                    {% if gen_section.section_id == section.section_id %}
+                        {% set section_generated = true %}
+                    {% endif %}
+                {% endfor %}
+                
+                {% if section_generated %}
+                <li>
+                    <a href="#section-{{ section.section_id }}">
+                        {{ section.section_id }} - {{ section.title }}
+                    </a>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    
+    {% for section in document.schema.sections %}
+        {% set section_generated = false %}
+        {% set content = "" %}
+        {% for gen_section in sections %}
+            {% if gen_section.section_id == section.section_id %}
+                {% set section_generated = true %}
+                {% set content = gen_section.content %}
+            {% endif %}
+        {% endfor %}
+        
+        {% if section_generated %}
+            <div id="section-{{ section.section_id }}" class="document-section">
+                <h2 class="section-heading">{{ section.section_id }} - {{ section.title }}</h2>
+                <div class="section-content">{{ content }}</div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

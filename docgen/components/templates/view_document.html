@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}{{ document.data.project_title }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .document-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .document-title {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .document-meta {
+        text-align: center;
+        color: #666;
+        margin-bottom: 3rem;
+    }
+    .section-content {
+        white-space: pre-wrap;
+        margin-bottom: 2rem;
+    }
+    .section-heading {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 0.5rem;
+    }
+    .table-of-contents ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    .table-of-contents li {
+        padding: 0.25rem 0;
+    }
+    @media print {
+        .no-print {
+            display: none;
+        }
+        body {
+            font-size: 12pt;
+        }
+        .document-container {
+            box-shadow: none;
+            padding: 0;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="no-print mb-4">
+    <a href="{{ url_for('document_editor', doc_id=doc_id) }}" class="btn btn-primary">
+        <i class="bi bi-arrow-left"></i> Back to Editor
+    </a>
+    <a href="{{ url_for('download_document', doc_id=doc_id) }}" class="btn btn-success">
+        <i class="bi bi-download"></i> Download Document
+    </a>
+    <button onclick="window.print()" class="btn btn-info">
+        <i class="bi bi-printer"></i> Print
+    </button>
+</div>
+
+<div class="document-container">
+    <div class="document-title">
+        <h1>{{ document.data.project_title }}</h1>
+    </div>
+    
+    <div class="document-meta">
+        <p>Generated on {{ document.created_at|datetimeformat }}</p>
+    </div>
+    
+    {% if document.data.abstract %}
+    <div class="abstract">
+        <h2>Abstract</h2>
+        <p>{{ document.data.abstract }}</p>
+    </div>
+    {% endif %}
+    
+    <div class="table-of-contents mb-5">
+        <h2>Table of Contents</h2>
+        <ul>
+            {% for section in sections %}
+                <li>
+                    <a href="#section-{{ section.section_id }}">
+                        {{ section.section_id }} - {{ section.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    {% for section in sections %}
+        <div id="section-{{ section.section_id }}" class="document-section">
+            <h2 class="section-heading">{{ section.section_id }} - {{ section.title }}</h2>
+            <div class="section-content">{{ section.content }}</div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

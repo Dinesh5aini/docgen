@@ -2,3 +2,8 @@ flask
 google-genai
 jinja2
 fpdf
+
+# fastapi
+# uvicorn
+pymongo
+python-dotenv

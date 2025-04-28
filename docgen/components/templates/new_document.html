@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Document{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Create a New Technical Document</h1>
+<p class="text-muted mb-4">Fill in the details below to generate your document structure. The more information you provide, the better your document will be.</p>
+
+<form method="POST" action="{{ url_for('new_document') }}" class="needs-validation" novalidate>
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            Project Overview
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="project_title" class="form-label">Project Title *</label>
+                <input type="text" class="form-control" id="project_title" name="project_title" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="primary_objective" class="form-label">Primary Objective *</label>
+                <textarea class="form-control" id="primary_objective" name="primary_objective" rows="2" required></textarea>
+                <div class="form-text">What is the main goal of this project?</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="problem_solves" class="form-label">Problem it Solves *</label>
+                <textarea class="form-control" id="problem_solves" name="problem_solves" rows="2" required></textarea>
+                <div class="form-text">What specific problem does this project address?</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="abstract" class="form-label">Abstract/Executive Summary *</label>
+                <textarea class="form-control" id="abstract" name="abstract" rows="3" required></textarea>
+                <div class="form-text">A brief overview of the entire project (2-3 paragraphs)</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            Problem & Audience
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="problem_audience_facing" class="form-label">Target Audience Pain Points</label>
+                <textarea class="form-control" id="problem_audience_facing" name="problem_audience_facing" rows="2"></textarea>
+                <div class="form-text">What issues do your users/stakeholders face?</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            Project Details
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="resources_available" class="form-label">Resources Available</label>
+                <textarea class="form-control" id="resources_available" name="resources_available" rows="2"></textarea>
+                <div class="form-text">What resources (team, budget, time) are available?</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="risk_or_constraints" class="form-label">Risks/Constraints</label>
+                <textarea class="form-control" id="risk_or_constraints" name="risk_or_constraints" rows="2"></textarea>
+                <div class="form-text">What challenges or limitations might affect this project?</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="functional_requirements" class="form-label">Functional Requirements *</label>
+                <textarea class="form-control" id="functional_requirements" name="functional_requirements" rows="3" required></textarea>
+                <div class="form-text">What must the system be able to do?</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            Technical Information
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="technologies" class="form-label">Technologies *</label>
+                <input type="text" class="form-control" id="technologies" name="technologies" required>
+                <div class="form-text">Comma-separated list (e.g., Python, AWS, React, MongoDB)</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="er_or_dataflow_diagram" class="form-label">Design Diagrams Needed</label>
+                <input type="text" class="form-control" id="er_or_dataflow_diagram" name="er_or_dataflow_diagram">
+                <div class="form-text">What diagrams would help explain the system (e.g., ER Diagram, System Architecture)</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="components" class="form-label">System Components</label>
+                <input type="text" class="form-control" id="components" name="components">
+                <div class="form-text">Comma-separated list of main components (e.g., API, Frontend, Database)</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="development_methodology" class="form-label">Development Methodology</label>
+                <input type="text" class="form-control" id="development_methodology" name="development_methodology">
+                <div class="form-text">E.g., Agile, Waterfall, DevOps</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="testing_strategy" class="form-label">Testing Strategy</label>
+                <textarea class="form-control" id="testing_strategy" name="testing_strategy" rows="2"></textarea>
+                <div class="form-text">How will the system be tested?</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            Future Outlook
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="limitations" class="form-label">Limitations</label>
+                <textarea class="form-control" id="limitations" name="limitations" rows="2"></textarea>
+                <div class="form-text">What won't this project accomplish or address?</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="future_enhancements" class="form-label">Future Enhancements</label>
+                <textarea class="form-control" id="future_enhancements" name="future_enhancements" rows="2"></textarea>
+                <div class="form-text">What features or improvements could be added later?</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="d-grid gap-2 mb-5">
+        <button type="submit" class="btn btn-lg btn-success">Generate Document Structure</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Form validation
+    (function () {
+        'use strict'
+        
+        const forms = document.querySelectorAll('.needs-validation')
+        
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+{% endblock %}
